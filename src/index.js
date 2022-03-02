@@ -10,7 +10,7 @@ _.join(["wei", "qihang"])
 
 
 const button = document.createElement("button")
-const body = document.querySelector("body")
+const body = document.querySelector("body")   
 button.innerHTML = "加载元素"
 body.appendChild(button)
 button.addEventListener("click", () => {

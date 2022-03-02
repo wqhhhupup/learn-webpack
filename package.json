@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
     "type-check": "tsc --noEmit",
-    "serve": "webpack serve --stats-error-details"
+    "build": "webpack --config ./config/webpack.common.js --env production",
+    "serve": "webpack serve --stats-error-details --config ./config/webpack.common.js --env development"
   },
   "keywords": [],
   "author": "",
@@ -26,6 +26,7 @@
     "html-webpack-plugin": "^5.5.0",
     "less": "^4.1.2",
     "less-loader": "^10.2.0",
+    "mini-css-extract-plugin": "^2.5.3",
     "postcss": "^8.4.6",
     "postcss-loader": "^6.2.1",
     "postcss-preset-env": "^7.4.1",
@@ -33,7 +34,8 @@
     "url-loader": "^4.1.1",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.7.4",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "dayjs": "^1.10.8",

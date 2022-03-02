@@ -1,0 +1,16 @@
+.div {
+  /* background-color: red; */
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+h1 {
+  /* color: #12345678;    => autoprefixer 不能对这种格式进行转化  有些浏览器可能不能识别 */
+  color: rgba(18,52,86,0.47059);
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+

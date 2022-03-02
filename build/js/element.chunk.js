@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpack=self.webpackChunkwebpack||[]).push([[113],{972:function(e,c,n){n.r(c);var t=document.createElement("h1");t.innerText="hello world",c.default=t}}]);

@@ -3,6 +3,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const webpack = require("webpack")
 const CopyPlugin = require("copy-webpack-plugin");
+const MiniCssExtractPlgin = require("mini-css-extract-plugin")
 module.exports = {
   mode: "development",
   // context:"",  默认为根路径
@@ -12,11 +13,15 @@ module.exports = {
     index: "./src/index.js"
   },
   output: {
-    filename: "[name].bundle.js",
+    filename: "js/[name].bundle.js",
     path: path.resolve(__dirname, "./build"),
-    chunkFilename: "[name].chunk.js" // 对应魔法注释的名字   通过import函数导入
+    chunkFilename: "js/[name].chunk.js" // 对应魔法注释的名字   通过import函数导入
     // 打包后静态资源的引用路径
     // publicPath:"./"
+  },
+  externals: {
+    lodash: "_",
+    dayjs: "dayjs"
   },
   resolve: {
     extensions: [".js", ".ts", ".jsx", ".json", "vue"],// 引入后可省略后缀,
@@ -38,7 +43,8 @@ module.exports = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendor"
+          filename:"js/[id]_vendor.js",
+          // name: "vendor"
         }
       },
 
@@ -138,6 +144,10 @@ module.exports = {
       ]
 
 
+    }),
+    new MiniCssExtractPlgin({
+      filename:"css/[name][hash:6].css"
     })
+    
   ]
 }

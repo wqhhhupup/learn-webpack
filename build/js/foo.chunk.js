@@ -1,0 +1,1 @@
+(self.webpackChunkwebpack=self.webpackChunkwebpack||[]).push([[957],{577:function(){console.log("i am foo from foo.js!!!!!!!!!!!!!!!!!!!!")}}]);
