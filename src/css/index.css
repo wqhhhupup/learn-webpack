@@ -1,0 +1,9 @@
+.div {
+  /* background-color: red; */
+  user-select: none;
+}
+h1 {
+  /* color: #12345678;    => autoprefixer 不能对这种格式进行转化  有些浏览器可能不能识别 */
+  color: #12345678;
+  user-select: none;
+}
