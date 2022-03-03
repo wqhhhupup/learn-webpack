@@ -1,8 +1,6 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const webpack = require("webpack")
-const CopyPlugin = require("copy-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const devConf = require("./webpack.dev")
 const proConf = require("./webpack.prod")
@@ -21,11 +19,11 @@ const commonConf = function (isProduction) {
       index: "./src/index.js"
     },
     output: {
-      filename: "js/[name].bundle.js",
+      filename: "js/[name].[contenthash:6].bundle.js",
       path: path.resolve(__dirname, "../build"),
-      chunkFilename: "js/[name].chunk.js" // 对应魔法注释的名字   通过import函数导入
+      chunkFilename: "js/[name].[contenthash:6].chunk.js", // 对应魔法注释的名字   通过import函数导入
       // 打包后静态资源的引用路径
-      // publicPath:"./"
+      publicPath:"./"
     },
 
     resolve: {
@@ -49,7 +47,7 @@ const commonConf = function (isProduction) {
         {
           test: /\.css$/,
           use: [
-             isProduction ?  MiniCssExtractPlugin.loader : "style-loader",
+            isProduction ? MiniCssExtractPlugin.loader : "style-loader",
             // MiniCssExtractPlugin.loader,
             "css-loader",
             {
@@ -64,7 +62,8 @@ const commonConf = function (isProduction) {
               // }
             }
 
-          ]
+          ],
+          sideEffects: true
         }, {
           test: /\.less$/,
           use: [
@@ -104,7 +103,16 @@ const commonConf = function (isProduction) {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./public/index2.html",
-        title: "learn webpack"
+        title: "learn webpack",
+        cache: false, // 当文件没有发生改变时  使用缓存
+        minify: isProduction ? {
+          removeComments: true, // 移除模板中的注释
+          collapseWhitespace: true, // 是否压缩
+          minifyCSS: true, // 是否对 模板中的css 压缩
+          // minifyJS: true
+
+        } : false  // 当前属性决定代码收压缩 
+
       }),
       new webpack.DefinePlugin({
         BASE_URL: '"./"'
